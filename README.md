@@ -23,15 +23,15 @@ I have been in the IT career field since 2007, and over the years, I have held v
 
 ## Education
 ### College Degree
-**Degree Type:**Bachelor's
+**Degree Type:**  Bachelor's
 
-**College:**  	Bellevue University
+**College:**  Bellevue University
 
-**Major:**  	Systems and Network Administration
+**Major:**  Systems and Network Administration
 
-**GPA:**  	4.0
+**GPA:**  4.0
 
-**Honors:**  	*Summa Cum Laude*
+**Honors:**  *Summa Cum Laude*
 
 Major classes included the following:
 - Networking
