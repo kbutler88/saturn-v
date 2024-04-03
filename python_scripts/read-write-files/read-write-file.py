@@ -17,8 +17,8 @@ with open('writefile.txt', 'r') as rf:
 print('\n\nWriting more stuff to the file\n')
 
 # Append text to file
-#with open('writefile.txt', 'a') as af:
-#    af.write("\nI need more text!")
+with open('writefile.txt', 'a') as af:
+    af.write("I need more text!\n")
 
 with open('writefile.txt', 'r') as rf:
     size_to_read = 30
