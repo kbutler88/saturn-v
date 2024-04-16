@@ -22,3 +22,9 @@ print(os.path.dirname(os.path.abspath('os-module.py')))
 print('os-module.py access time', os.path.getatime('os-module.py'))
 print('os-module.py is file?', os.path.isfile('os-module.py'))
 print('os-module.py is dir?', os.path.isdir('os-module.py'))
+
+print(os.stat('os-module.py'))
+os.chown('os-module.py', 1000, 1000)
+# Using "0o" before the octal number signifies that the numbers are meant to be octal; after this is the octal mode value
+os.chmod('os-module.py', 0o750)
+print(os.stat('os-module.py'))
