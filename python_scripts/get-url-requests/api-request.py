@@ -26,19 +26,57 @@ def main():
     print(f'  Name: {name}')
     print(f'  Age: {age}')
     # New dob date conversion
-    print(f'  DoB: {converted_dob.strftime("%B %d, %Y")}')
+    newdob = converted_dob.strftime("%B %d, %Y")
+    print(f'  DoB: {newdob}')
 
     # Add name of user to array for tracking
     all_names.append(name)
+    all_genders.append(gender)
+    all_ages.append(age)
+    all_dobs.append(converted_dob)
 
 def savefile():
+    print()
     file_name = input('Enter a filename: ')
     if file_name != '':
         with open(file_name, 'w') as wf:
-            for name in all_names:
-                wf.write(name + '\n')
+            # Add header for CSV
+            wf.write('Name,Gender,Age,DoB\n')
+            #for name in all_names:
+            i = 0
+            while i < len(all_names):
+                wf.write(all_names[i] + ',')
+                wf.write(all_genders[i] + ',')
+                wf.write(str(all_ages[i]) + ',')
+                wf.write(str(all_dobs[i]) + '\n')
+                i += 1
     else:
         print('ERROR: File name cannot be empty!')
+
+def loadfile():
+    print()
+    filename = input('Enter a filename: ')
+    if filename == '':
+        print('ERROR: No filename provided!')
+    elif os.path.exists(filename) == False:
+        print('ERROR: No such file!')
+    else:
+        with open(filename, 'r') as rf:
+            # Skip the first line
+            next(rf)
+            # Read all other lines
+            for line in rf:
+                # .stip() removes the line return at the end of the line
+                line = line.strip()
+                # Split the line by commas (name, gender, age, dob)
+                splitline = line.split(',')
+                all_names.append(splitline[0])
+                all_genders.append(splitline[1])
+                all_ages.append(splitline[2])
+                # Split the date from the time
+                splitdob = splitline[3].split(' ')
+                # Only parse the date provided
+                all_dobs.append(datetime.strptime(splitdob[0], "%Y-%m-%d"))
 
 def get_month_name_from_date(dob):
     # Split the original format to each individual date component
@@ -74,6 +112,9 @@ def get_month_name_from_date(dob):
 
 # Global array to track names of users in session
 all_names = []
+all_genders = []
+all_ages = []
+all_dobs = []
 file_name = ""
 
 while True:
@@ -89,21 +130,17 @@ while True:
             print('No names have been found yet!')
         else:
             print()
-            for name in all_names:
-                print(name)
+            #for name in all_names:
+                #print(name)
+            i = 0
+            while i < len(all_names):
+                print(all_names[i] + '; ', end='')
+                print(all_genders[i] + '; ', end='')
+                print(str(all_ages[i]) + '; ', end='')
+                print(all_dobs[i].strftime("%B %d, %Y"))
+                i += 1
     elif response.lower() == 'l':
-        loadfile = input('Enter a filename: ')
-        print()
-        if loadfile == '':
-            print('ERROR: No filename provided!')
-        elif os.path.exists(loadfile) == False:
-            print('ERROR: No such file!')
-        else:
-            with open(loadfile, 'r') as rf:
-                for line in rf:
-                    # .stip() removes the line return at the end of the line
-                    line = line.strip()
-                    all_names.append(line)
+        loadfile()
     elif response.lower() == 's':
         if not all_names:
             print('No names have been found yet!')
